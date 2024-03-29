@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -14,17 +14,21 @@ namespace WindowsFormsApp6
 {
     public partial class Form1 : Form
     {
+
+         public static ChatUser user1 = new ChatUser(mediator, "User 1");
+         public static ChatUser user2 = new ChatUser(mediator, "User 2");
+         public static ChatUser user3 = new ChatUser(mediator, "User 3");
+         public static ChatMediator mediator = new ChatMediator();
+
+
         public Form1()
         {
             InitializeComponent();
         }
         private void button1_Click(object sender, EventArgs e)
         {
-            ChatMediator mediator = new ChatMediator();
-
-            ChatUser user1 = new ChatUser(mediator, "User 1");
-            ChatUser user2 = new ChatUser(mediator, "User 2");
-            ChatUser user3 = new ChatUser(mediator, "User 3");
+            
+           
 
             mediator.RegisterUser(user1);
             mediator.RegisterUser(user2);
@@ -70,7 +74,7 @@ namespace WindowsFormsApp6
             {
                 _users.Add(user);
             }
-            public void SendMessage(string senderName, string message)
+            public void TransferMessage(string senderName, string message)
             {
                 foreach(var user in _users)
                 {
@@ -116,16 +120,13 @@ namespace WindowsFormsApp6
             }
             public void RecieveMessage(string senderName, string message)
             {
-                //MessageBox.Show($"{Name}: Recieved message : '{message}' from {senderName}");
-                receivedMessages.Add(message);
+                receivedMessages.Add($"You recieved a message : '{message}' from {senderName}");
 
             }
             public List<string> GetReceivedMessages()
             {
                 return receivedMessages;
             }
-
-
         }
 
     }
